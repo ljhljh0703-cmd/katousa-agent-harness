@@ -6,7 +6,9 @@
 
 투자는 내가, 설명은 카투사가. 초보 투자자의 반복 질문과 이해 결과를 기억해 설명 방식은 조절하고, 안전 기준은 고정하는 Codex 플러그인 프로젝트입니다.
 
-> 상태: `IMPLEMENTED / LOCALLY_VERIFIED / USER_RESEARCH_PLANNED`
+[공개 GitHub 저장소](https://github.com/ljhljh0703-cmd/katousa-agent-harness) · [상세 케이스 스터디](docs/PORTFOLIO-CASE-STUDY.md) · [사용자 검증 계획](docs/USER-RESEARCH-PLAN.md)
+
+> 상태: `PUBLIC / CI_VERIFIED / USER_RESEARCH_PLANNED`
 > 검증 기준:
 > `python3 -m unittest discover -s tests -v` `29 passed`
 > `python3 scripts/run_replay_eval.py --out dist` `30 runs / invariant stable`

@@ -1,6 +1,6 @@
 # 카투사 표준 포트폴리오 로드맵
 
-Status: `GITHUB_PUBLICATION_IN_PROGRESS / USER_RESEARCH_PLANNED`
+Status: `GITHUB_PUBLIC / CI_VERIFIED / USER_RESEARCH_PLANNED`
 
 ## 정본과 제외 범위
 
@@ -14,6 +14,8 @@ Status: `GITHUB_PUBLICATION_IN_PROGRESS / USER_RESEARCH_PLANNED`
 목표: 기술 검토자가 clone과 테스트로 주장을 확인할 수 있게 한다.
 
 - 저장소명: `katousa-agent-harness`
+- 공개 URL: https://github.com/ljhljh0703-cmd/katousa-agent-harness
+- 검증 commit: `ea2d726100d5b16b691b110ce4bec6b526e7fefb`
 - 설명: `Beginner-friendly investment explanation agent with controlled memory, adaptation, and deterministic safety checks.`
 - 토픽: `ai-agent`, `agent-harness`, `loop-engineering`, `financial-literacy`, `codex-plugin`, `ai-safety`
 - 첫 공개 파일: 플러그인 소스, fixtures, tests, replay·포트폴리오 증거 생성기, 공개 문서
@@ -21,12 +23,14 @@ Status: `GITHUB_PUBLICATION_IN_PROGRESS / USER_RESEARCH_PLANNED`
 
 완료 조건:
 
-- [ ] 공개 저장소 URL 응답 확인
-- [ ] 기본 브랜치 `main`
-- [ ] README에서 케이스 스터디·증거·현수봇 링크 확인
-- [ ] 새 clone에서 단위 테스트 29개 통과
-- [ ] 새 clone에서 `scripts/export_portfolio_evidence.py` 재현
-- [ ] 공개 후보 파일의 로컬 절대경로·이메일·비밀 문자열 0건
+- [x] 공개 저장소 URL `HTTP 200`
+- [x] 기본 브랜치 `main`
+- [x] README에서 케이스 스터디·증거·현수봇 링크 확인
+- [x] 새 clone에서 단위 테스트 29개 통과
+- [x] 새 clone에서 replay 30회, 안전 불변식 불일치 0건
+- [x] 새 clone에서 `scripts/export_portfolio_evidence.py` 재현
+- [x] GitHub Actions CI 성공
+- [x] 공개 후보 파일의 로컬 절대경로·이메일·비밀 문자열 0건
 
 ## Phase 2 — 읽히는 포트폴리오
 
