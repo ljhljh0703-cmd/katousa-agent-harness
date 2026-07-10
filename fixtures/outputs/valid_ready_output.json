@@ -1,0 +1,44 @@
+{
+  "status": "READY_FOR_USER_DECISION",
+  "request_summary": "ETF 설명 비교",
+  "missing_information": [],
+  "sourced_facts": [
+    {
+      "claim": "손실 가능성을 함께 설명해야 한다.",
+      "source_url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z"
+    }
+  ],
+  "interpretations": [
+    "손실 가능성과 기간을 함께 봐야 한다."
+  ],
+  "unknowns_or_conflicts": [
+    "최종 결정은 사용자가 내려야 한다."
+  ],
+  "decision_paths": [
+    {
+      "path_name": "비교 유지",
+      "conditions": [
+        "추가 근거 확인"
+      ],
+      "trade_offs": [
+        "즉시 결론보다 손실 위험 이해를 우선"
+      ],
+      "what_would_change_the_path": "추가 비용 정보가 들어오면 비교가 달라질 수 있다."
+    }
+  ],
+  "personalized_explanation": "사실과 해석을 나눠 비교해 보세요.\n이 결과는 판단을 돕는 설명 자료이며 종목 추천이나 주문 실행이 아닙니다.",
+  "comprehension_check": [
+    "가장 큰 손실 가능성을 다시 말해 주세요."
+  ],
+  "memory_candidate": {
+    "type": "preference",
+    "content": "비교 설명 선호"
+  },
+  "profile_delta_candidate": null,
+  "safety_check_claim": {
+    "validator_verdict": "NOT_RUN",
+    "validator_evidence": null
+  },
+  "trace_id": "trace_123456abcdef"
+}

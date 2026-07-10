@@ -1,0 +1,72 @@
+{
+  "case_id": "complete_sourced_question",
+  "request": "ETF 적립식 매수와 예금 유지의 차이를 이해하고 싶어요.",
+  "status": "READY_FOR_USER_DECISION",
+  "expected_status": "READY_FOR_USER_DECISION",
+  "expected_invariant_verdict": "PASS",
+  "missing_information": [],
+  "sourced_facts": [
+    {
+      "claim": "손실 가능성과 원금 손실 위험을 함께 설명해야 한다.",
+      "source_url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z"
+    }
+  ],
+  "interpretations": [
+    "투자 판단에는 손실 가능성과 목표 기간을 함께 비교해야 한다."
+  ],
+  "unknowns_or_conflicts": [
+    "현재 사용자의 최종 선택은 아직 확인되지 않았다."
+  ],
+  "decision_paths": [
+    {
+      "path_name": "정보를 더 모은 뒤 비교 지속",
+      "conditions": [
+        "현재 목표와 기간이 이미 확인되었음"
+      ],
+      "trade_offs": [
+        "손실 가능성과 기대 변동성을 함께 비교해야 함"
+      ],
+      "what_would_change_the_path": "추가 수수료 정보나 세금 정보가 필요하면 근거를 더 모은다."
+    }
+  ],
+  "memory_candidate": {
+    "type": "preference",
+    "content": "비교 설명을 선호함"
+  },
+  "profile_delta_candidate": {
+    "id": "delta_0001",
+    "field": "explanation_style.format",
+    "from": "checklist",
+    "to": "numbers",
+    "basis_event_ids": [
+      "evt_0001"
+    ],
+    "risk_color": "green",
+    "requires_confirmation": true,
+    "status": "candidate",
+    "created_at": "2026-07-10T00:00:00Z",
+    "basis": {
+      "kind": "interaction_observation",
+      "summary": "사용자가 숫자 비교를 요청했다."
+    }
+  },
+  "comprehension_check": [
+    "가장 큰 손실 가능성을 한 문장으로 다시 말해 주세요.",
+    "어떤 정보가 더 있으면 판단이 바뀌는지 말해 주세요."
+  ],
+  "source_ledger": [
+    {
+      "url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z",
+      "status": 200
+    }
+  ],
+  "explanation_core": {
+    "facts": "손실 가능성과 목표 기간 확인이 필요하다.",
+    "interpretation": "설명은 비교 자료이며 최종 선택을 대신하지 않는다.",
+    "unknowns": "최종 선택과 추가 비용 정보는 아직 남아 있다.",
+    "next_step": "필요하면 수수료와 세금 근거를 더 모은다.",
+    "example": "예금과 ETF를 비교할 때는 수익 기대보다 손실 가능성과 기간부터 본다."
+  }
+}

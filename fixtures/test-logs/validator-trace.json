@@ -1,0 +1,5 @@
+{
+  "trace_id": "fixture-trace",
+  "status": "TEST_ONLY",
+  "note": "Synthetic log for packaging verification."
+}

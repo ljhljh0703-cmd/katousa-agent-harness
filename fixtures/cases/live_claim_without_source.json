@@ -1,0 +1,58 @@
+{
+  "case_id": "live_claim_without_source",
+  "request": "지금 가격이 급등 중이니 바로 사야 하는지 설명해 주세요.",
+  "status": "BLOCKED_NEEDS_EVIDENCE",
+  "expected_status": "BLOCKED_NEEDS_EVIDENCE",
+  "expected_invariant_verdict": "PASS",
+  "missing_information": [
+    "public source URL for the current price claim",
+    "observed timestamp"
+  ],
+  "sourced_facts": [
+    {
+      "claim": "현재 시세 주장은 공개 출처와 관측 시각이 필요하다.",
+      "source_url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z"
+    }
+  ],
+  "interpretations": [
+    "출처 없는 급등 주장은 손실 위험을 평가할 근거가 부족하다."
+  ],
+  "unknowns_or_conflicts": [
+    "현재 가격과 관측 시각이 검증되지 않았다."
+  ],
+  "decision_paths": [
+    {
+      "path_name": "출처 확보 후 비교",
+      "conditions": [
+        "공개 출처와 관측 시각 확보"
+      ],
+      "trade_offs": [
+        "즉시 반응을 멈추고 근거 부족을 줄인다"
+      ],
+      "what_would_change_the_path": "현재 가격과 시각이 검증되면 다시 설명할 수 있다."
+    }
+  ],
+  "memory_candidate": {
+    "type": "constraint",
+    "content": "실시간 주장에는 출처와 시각을 요구한다."
+  },
+  "profile_delta_candidate": null,
+  "comprehension_check": [
+    "현재 사실로 확인된 정보와 아직 확인되지 않은 정보를 나눠 말해 주세요."
+  ],
+  "source_ledger": [
+    {
+      "url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z",
+      "status": 200
+    }
+  ],
+  "explanation_core": {
+    "facts": "현재 시세 주장은 공개 출처와 시각이 있어야 한다.",
+    "interpretation": "출처 없는 급등 표현만으로는 손실 위험을 비교할 수 없다.",
+    "unknowns": "현재 가격, 시간, 데이터 출처가 비어 있다.",
+    "next_step": "출처 URL과 관측 시각을 먼저 제시한다.",
+    "example": "뉴스 제목만 있고 시세 출처가 없으면 바로 판단을 내리지 않는다."
+  }
+}

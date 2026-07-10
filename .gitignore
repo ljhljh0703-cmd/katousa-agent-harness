@@ -1,0 +1,11 @@
+_dev/
+logs/
+dist/
+submission.zip
+.calm-trade/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.DS_Store

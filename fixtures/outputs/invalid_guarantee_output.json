@@ -1,0 +1,44 @@
+{
+  "status": "READY_FOR_USER_DECISION",
+  "request_summary": "보장 수익 설명",
+  "missing_information": [],
+  "sourced_facts": [
+    {
+      "claim": "손실 가능성을 함께 설명해야 한다.",
+      "source_url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z"
+    }
+  ],
+  "interpretations": [
+    "이 선택은 guaranteed return 입니다."
+  ],
+  "unknowns_or_conflicts": [
+    "미래 수익은 불확실하다."
+  ],
+  "decision_paths": [
+    {
+      "path_name": "다시 작성",
+      "conditions": [
+        "보장 표현 제거"
+      ],
+      "trade_offs": [
+        "강한 표현을 버리고 불확실성을 유지"
+      ],
+      "what_would_change_the_path": "표현을 수정하면 다시 검증할 수 있다."
+    }
+  ],
+  "personalized_explanation": "이 선택은 guaranteed return 입니다.\n이 결과는 판단을 돕는 설명 자료이며 종목 추천이나 주문 실행이 아닙니다.",
+  "comprehension_check": [
+    "보장과 가능성의 차이를 말해 주세요."
+  ],
+  "memory_candidate": {
+    "type": "misunderstanding",
+    "content": "보장 표현 사용"
+  },
+  "profile_delta_candidate": null,
+  "safety_check_claim": {
+    "validator_verdict": "PASS",
+    "validator_evidence": null
+  },
+  "trace_id": "trace_deadbeefcafe"
+}

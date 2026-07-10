@@ -1,0 +1,57 @@
+{
+  "case_id": "repeated_failure_circuit_breaker",
+  "request": "같은 잘못된 출력이 계속 나오면 어떻게 되나요?",
+  "status": "BLOCKED_HUMAN_REVIEW",
+  "expected_status": "BLOCKED_HUMAN_REVIEW",
+  "expected_invariant_verdict": "PASS",
+  "missing_information": [],
+  "sourced_facts": [
+    {
+      "claim": "같은 오류가 세 번 반복되면 루프를 멈춰야 한다.",
+      "source_url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z"
+    }
+  ],
+  "interpretations": [
+    "반복 실패는 자동 수정을 중단하고 인간 검토로 넘겨야 한다."
+  ],
+  "unknowns_or_conflicts": [
+    "같은 오류가 세 번 발생해 추가 반복이 이득이 없다고 판단됐다."
+  ],
+  "decision_paths": [
+    {
+      "path_name": "회로 차단 후 검토",
+      "conditions": [
+        "동일 오류 서명이 세 번 반복"
+      ],
+      "trade_offs": [
+        "자동 복구를 멈추고 안전을 우선한다"
+      ],
+      "what_would_change_the_path": "새로운 입력이나 수정 근거가 생기면 새 run으로 다시 시작한다."
+    }
+  ],
+  "memory_candidate": {
+    "type": "knowledge_check",
+    "content": "반복 오류는 세 번에서 멈춘다."
+  },
+  "profile_delta_candidate": null,
+  "comprehension_check": [
+    "왜 같은 오류가 반복되면 멈추는지 설명해 주세요."
+  ],
+  "source_ledger": [
+    {
+      "url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z",
+      "status": 200
+    }
+  ],
+  "iteration_count": 3,
+  "error_signature": "missing_sources",
+  "explanation_core": {
+    "facts": "같은 오류가 세 번 반복되면 자동 루프를 멈춘다.",
+    "interpretation": "반복 실패는 인간 검토로 넘겨야 한다.",
+    "unknowns": "추가 자동 반복으로 해결될 근거가 없다.",
+    "next_step": "새 근거가 준비되면 새 run으로 다시 시작한다.",
+    "example": "세 번 연속 같은 검증 실패가 나면 더 돌리지 않는다."
+  }
+}

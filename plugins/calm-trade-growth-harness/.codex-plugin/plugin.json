@@ -1,0 +1,33 @@
+{
+  "name": "calm-trade-growth-harness",
+  "version": "0.1.0",
+  "description": "Adapt financial explanations to confirmed user preferences while keeping safety rules fixed.",
+  "author": {
+    "name": "Juhyeong Lee",
+    "url": "https://github.com/ljhljh0703-cmd"
+  },
+  "license": "MIT",
+  "keywords": [
+    "financial-literacy",
+    "decision-support",
+    "agent-harness",
+    "loop-engineering",
+    "user-memory"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "카투사",
+    "shortDescription": "수익률은 못 올려도, 이해도는 올려드립니다.",
+    "longDescription": "카카오 투자하는 사람의 질문을 기억해 설명은 점점 맞춰 가고, 출처·비권유·비실행 원칙은 고정하는 투자 이해 파트너입니다.",
+    "developerName": "Juhyeong Lee",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "이 투자 질문을 카투사 설명 카드로 바꾸고 부족한 정보를 확인해 줘.",
+      "같은 안전 기준을 유지하면서 숫자형과 사례형 설명을 비교해 줘.",
+      "이 대화에서 저장할 기억 후보와 사용자 확인이 필요한 변경을 분리해 줘."
+    ]
+  }
+}

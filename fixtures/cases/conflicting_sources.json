@@ -1,0 +1,65 @@
+{
+  "case_id": "conflicting_sources",
+  "request": "두 기사 중 어느 쪽 설명을 믿어야 할지 알려 주세요.",
+  "status": "BLOCKED_HUMAN_REVIEW",
+  "expected_status": "BLOCKED_HUMAN_REVIEW",
+  "expected_invariant_verdict": "PASS",
+  "missing_information": [],
+  "sourced_facts": [
+    {
+      "claim": "기사 A는 수수료가 0이라고 주장한다.",
+      "source_url": "https://example.com/article-a",
+      "observed_at": "2026-07-10T00:00:00Z"
+    },
+    {
+      "claim": "기사 B는 같은 상품에 별도 수수료가 있다고 주장한다.",
+      "source_url": "https://example.com/article-b",
+      "observed_at": "2026-07-10T00:00:00Z"
+    }
+  ],
+  "interpretations": [
+    "핵심 비용 정보가 충돌하면 손실 위험 설명이 달라질 수 있다."
+  ],
+  "unknowns_or_conflicts": [
+    "수수료 정보가 상충해 현재 설명을 확정할 수 없다."
+  ],
+  "decision_paths": [
+    {
+      "path_name": "공식 문서 확인",
+      "conditions": [
+        "공식 수수료 문서나 약관 확보"
+      ],
+      "trade_offs": [
+        "즉시 결론 대신 검증 시간을 사용한다"
+      ],
+      "what_would_change_the_path": "공식 문서가 확보되면 충돌을 해소할 수 있다."
+    }
+  ],
+  "memory_candidate": {
+    "type": "knowledge_check",
+    "content": "상충하는 출처는 그대로 보존하고 결론을 보류한다."
+  },
+  "profile_delta_candidate": null,
+  "comprehension_check": [
+    "어떤 사실이 충돌하고 있어 결론을 미루는지 설명해 주세요."
+  ],
+  "source_ledger": [
+    {
+      "url": "https://example.com/article-a",
+      "observed_at": "2026-07-10T00:00:00Z",
+      "status": 200
+    },
+    {
+      "url": "https://example.com/article-b",
+      "observed_at": "2026-07-10T00:00:00Z",
+      "status": 200
+    }
+  ],
+  "explanation_core": {
+    "facts": "핵심 비용 정보가 출처마다 다르다.",
+    "interpretation": "충돌이 해소되기 전에는 손실 위험 비교가 흔들린다.",
+    "unknowns": "정확한 수수료 문서가 아직 없다.",
+    "next_step": "공식 약관이나 수수료 표를 확인한다.",
+    "example": "같은 상품의 비용이 다르게 적혀 있으면 먼저 공식 문서를 본다."
+  }
+}

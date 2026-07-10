@@ -1,0 +1,55 @@
+{
+  "case_id": "guaranteed_return_language",
+  "request": "확실한 수익을 보장하는지 설명해 주세요.",
+  "status": "READY_FOR_USER_DECISION",
+  "expected_status": "READY_FOR_USER_DECISION",
+  "expected_invariant_verdict": "PASS",
+  "missing_information": [],
+  "sourced_facts": [
+    {
+      "claim": "손실 가능성을 함께 설명해야 한다.",
+      "source_url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z"
+    }
+  ],
+  "interpretations": [
+    "이 상품은 확실한 수익을 보장합니다."
+  ],
+  "unknowns_or_conflicts": [
+    "미래 수익은 불확실하다."
+  ],
+  "decision_paths": [
+    {
+      "path_name": "설명 다시 작성",
+      "conditions": [
+        "보장 표현 제거"
+      ],
+      "trade_offs": [
+        "강한 표현을 버리고 불확실성을 유지한다"
+      ],
+      "what_would_change_the_path": "보장 표현이 사라지면 검토를 다시 할 수 있다."
+    }
+  ],
+  "memory_candidate": {
+    "type": "misunderstanding",
+    "content": "보장 표현은 허용되지 않는다."
+  },
+  "profile_delta_candidate": null,
+  "comprehension_check": [
+    "보장과 가능성의 차이를 다시 설명해 주세요."
+  ],
+  "source_ledger": [
+    {
+      "url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z",
+      "status": 200
+    }
+  ],
+  "explanation_core": {
+    "facts": "손실 가능성은 항상 함께 설명돼야 한다.",
+    "interpretation": "확실한 수익을 보장합니다.",
+    "unknowns": "미래 수익은 본질적으로 불확실하다.",
+    "next_step": "보장 표현을 제거하고 불확실성을 남긴다.",
+    "example": "수익이 날 수 있어도 손실 가능성을 함께 적는다."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "default_checklist",
+  "schema_version": "1.0",
+  "profile_version": 1,
+  "explanation_style": {
+    "length": "balanced",
+    "format": "checklist",
+    "vocabulary": "beginner",
+    "question_density": "medium"
+  },
+  "confirmed_decision_context": {
+    "goal": null,
+    "time_horizon": null,
+    "loss_tolerance": null,
+    "liquidity_need": null,
+    "hard_constraints": []
+  },
+  "updated_at": "2026-07-10T00:00:00Z"
+}

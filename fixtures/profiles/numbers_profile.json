@@ -1,0 +1,21 @@
+{
+  "name": "numbers_profile",
+  "schema_version": "1.0",
+  "profile_version": 2,
+  "explanation_style": {
+    "length": "balanced",
+    "format": "numbers",
+    "vocabulary": "beginner",
+    "question_density": "low"
+  },
+  "confirmed_decision_context": {
+    "goal": "retirement savings",
+    "time_horizon": "10 years",
+    "loss_tolerance": "moderate",
+    "liquidity_need": "low",
+    "hard_constraints": [
+      "no leverage"
+    ]
+  },
+  "updated_at": "2026-07-10T00:00:00Z"
+}

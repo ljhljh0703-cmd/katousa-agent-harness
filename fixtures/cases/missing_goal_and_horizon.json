@@ -1,0 +1,58 @@
+{
+  "case_id": "missing_goal_and_horizon",
+  "request": "지금 이 자산을 살지 말지 설명해 주세요.",
+  "status": "BLOCKED_NEEDS_INFO",
+  "expected_status": "BLOCKED_NEEDS_INFO",
+  "expected_invariant_verdict": "PASS",
+  "missing_information": [
+    "investment goal",
+    "time horizon"
+  ],
+  "sourced_facts": [
+    {
+      "claim": "투자 설명에는 목표와 손실 가능성을 함께 확인해야 한다.",
+      "source_url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z"
+    }
+  ],
+  "interpretations": [
+    "목표와 기간이 없으면 같은 변동성도 다르게 해석될 수 있다."
+  ],
+  "unknowns_or_conflicts": [
+    "목표와 기간이 없어 손실 감내 범위를 판단할 수 없다."
+  ],
+  "decision_paths": [
+    {
+      "path_name": "정보 확인 후 재질문",
+      "conditions": [
+        "goal과 time horizon을 먼저 확인"
+      ],
+      "trade_offs": [
+        "지금 결론을 미루는 대신 근거 부족을 줄인다"
+      ],
+      "what_would_change_the_path": "목표와 기간이 확인되면 비교 설명을 이어갈 수 있다."
+    }
+  ],
+  "memory_candidate": {
+    "type": "knowledge_check",
+    "content": "목표와 기간 확인 전에는 판단을 보류한다."
+  },
+  "profile_delta_candidate": null,
+  "comprehension_check": [
+    "투자 목표와 자금을 써야 하는 시점을 알려 주세요."
+  ],
+  "source_ledger": [
+    {
+      "url": "https://www.fsc.go.kr/po020201/75646",
+      "observed_at": "2026-07-10T00:00:00Z",
+      "status": 200
+    }
+  ],
+  "explanation_core": {
+    "facts": "목표와 기간이 없으면 같은 자산도 판단 기준이 달라진다.",
+    "interpretation": "지금은 설명을 이어가기에 필요한 핵심 맥락이 부족하다.",
+    "unknowns": "goal과 time horizon이 비어 있다.",
+    "next_step": "투자 목적과 자금 사용 시점을 먼저 확인한다.",
+    "example": "3개월 후 쓸 돈과 10년 뒤 쓸 돈은 같은 설명으로 다루면 안 된다."
+  }
+}

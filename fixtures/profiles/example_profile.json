@@ -1,0 +1,21 @@
+{
+  "name": "example_profile",
+  "schema_version": "1.0",
+  "profile_version": 3,
+  "explanation_style": {
+    "length": "detailed",
+    "format": "example",
+    "vocabulary": "beginner",
+    "question_density": "high"
+  },
+  "confirmed_decision_context": {
+    "goal": "home down payment",
+    "time_horizon": "3 years",
+    "loss_tolerance": "low",
+    "liquidity_need": "high",
+    "hard_constraints": [
+      "keep emergency cash separate"
+    ]
+  },
+  "updated_at": "2026-07-10T00:00:00Z"
+}
