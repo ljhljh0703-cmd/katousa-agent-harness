@@ -321,7 +321,7 @@ Public outputs:
 - test and replay report;
 - sample traces with synthetic data only;
 - evidence map;
-- case study pairing this project with Hyunsoo Bot.
+- standalone case study explaining the product decisions, implementation, evidence, and limitations.
 
 Portfolio claim pattern:
 

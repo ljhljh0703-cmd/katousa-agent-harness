@@ -6,7 +6,7 @@ Status: `GITHUB_PUBLIC / CI_VERIFIED / USER_RESEARCH_PLANNED`
 
 - 포트폴리오의 정본은 공개 GitHub 저장소다.
 - 공개 서사는 `README.md`와 `docs/PORTFOLIO-CASE-STUDY.md`에서 시작한다.
-- 해커톤 제출 ZIP, 원본 대화 로그, `_dev/`, `dist/`, `logs/`는 포트폴리오 자산과 공개 저장소에서 제외한다.
+- 해커톤 제출물과 원본 대화 로그는 포트폴리오 자산에서 제외한다. `_dev/`, `dist/`, `logs/`도 공개 저장소에 넣지 않는다.
 - 실제 사용자 검증 전에는 “이해도를 높였다”가 아니라 “이해도에 맞춰 설명을 바꾸는 구조를 구현했다”고 표현한다.
 
 ## Phase 1 — GitHub 공개 기반
@@ -25,7 +25,7 @@ Status: `GITHUB_PUBLIC / CI_VERIFIED / USER_RESEARCH_PLANNED`
 
 - [x] 공개 저장소 URL `HTTP 200`
 - [x] 기본 브랜치 `main`
-- [x] README에서 케이스 스터디·증거·현수봇 링크 확인
+- [x] README에서 케이스 스터디·증거·사용자 검증 계획 링크 확인
 - [x] 새 clone에서 단위 테스트 29개 통과
 - [x] 새 clone에서 replay 30회, 안전 불변식 불일치 0건
 - [x] 새 clone에서 `scripts/export_portfolio_evidence.py` 재현
@@ -38,10 +38,9 @@ Status: `GITHUB_PUBLIC / CI_VERIFIED / USER_RESEARCH_PLANNED`
 
 핵심 메시지:
 
-> 돈을 움직이는 AI는 행동을 통제하고, 사람에 맞춰 변하는 AI는 적응을 통제했습니다.
+> 설명은 나에게 맞게. 안전 기준은 누구에게나 같게.
 
-- 현수봇: 퀀트형 자동매매 에이전트의 행동 하네스
-- 카투사: 초보 투자자에게 맞춰 성장하는 설명 에이전트의 헤르메스형 하네스
+카투사를 다른 프로젝트의 변형이나 후속편으로 소개하지 않는다. 초보 투자자의 판단을 대신하지 않으면서 설명 방식만 성장시키는 독립 제품으로 설명한다.
 
 필요한 시각 자료:
 

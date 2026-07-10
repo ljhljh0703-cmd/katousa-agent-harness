@@ -2,119 +2,117 @@
 
 [![CI](https://github.com/ljhljh0703-cmd/katousa-agent-harness/actions/workflows/ci.yml/badge.svg)](https://github.com/ljhljh0703-cmd/katousa-agent-harness/actions/workflows/ci.yml)
 
-**카카오 투자하는 사람. 수익률은 못 올려도, 이해도는 올려드립니다.**
+> **수익률은 못 올려도, 이해도는 올려드립니다.**
+>
+> 설명은 나에게 맞게. 안전 기준은 누구에게나 같게.
 
-투자는 내가, 설명은 카투사가. 초보 투자자의 반복 질문과 이해 결과를 기억해 설명 방식은 조절하고, 안전 기준은 고정하는 Codex 플러그인 프로젝트입니다.
+카투사는 초보 투자자가 스스로 판단 기준을 세우도록 돕는 AI 투자 이해 파트너입니다. 종목을 골라 주거나 주문을 대신하지 않습니다. 지금 빠진 정보가 무엇인지, 어떤 위험을 놓쳤는지, 무엇이 확인되면 판단이 달라지는지를 설명합니다.
 
-[공개 GitHub 저장소](https://github.com/ljhljh0703-cmd/katousa-agent-harness) · [상세 케이스 스터디](docs/PORTFOLIO-CASE-STUDY.md) · [사용자 검증 계획](docs/USER-RESEARCH-PLAN.md)
+대화를 거듭하면 설명은 숫자형·사례형·체크리스트형 중 나에게 편한 방식으로 바뀝니다. 그러나 출처 확인, 위험 고지, 비권유, 비실행 원칙은 바뀌지 않습니다.
 
-> 상태: `PUBLIC / CI_VERIFIED / USER_RESEARCH_PLANNED`
-> 검증 기준:
-> `python3 -m unittest discover -s tests -v` `29 passed`
-> `python3 scripts/run_replay_eval.py --out dist` `30 runs / invariant stable`
-> `python3 scripts/export_portfolio_evidence.py` `public-safe evidence snapshot`
-> `python3 "$CODEX_HOME/skills/.system/plugin-creator/scripts/validate_plugin.py" plugins/calm-trade-growth-harness` `PASS`
-> `python3 "$CODEX_HOME/skills/.system/skill-creator/scripts/quick_validate.py" plugins/calm-trade-growth-harness/skills/calm-trade-growth-harness` `PASS`
+[작동 구조](docs/IMPLEMENTATION-SPEC.md) · [상세 케이스 스터디](docs/PORTFOLIO-CASE-STUDY.md) · [검증 근거](docs/EVIDENCE-MAP.md) · [사용자 테스트 계획](docs/USER-RESEARCH-PLAN.md)
 
-## 포트폴리오에서 보는 법
-
-카투사는 현수봇의 축소판이 아닙니다. 두 프로젝트는 서로 다른 위험을 통제합니다.
-
-| | 현수봇 | 카투사 |
-|---|---|---|
-| 한 줄 정의 | 퀀트형 자동매매 에이전트의 행동 하네스 | 초보 투자자에게 맞춰 성장하는 설명 에이전트의 헤르메스형 하네스 |
-| 통제 대상 | 주문으로 이어지는 외부 행동 | 기억과 개인화로 이어지는 내부 적응 |
-| 사람에게 남긴 권한 | 실거래 전환과 규칙 채택 | 투자 결정과 중요한 프로필 변경 |
-
-> 돈을 움직이는 AI는 행동을 통제하고, 사람에 맞춰 변하는 AI는 적응을 통제했습니다.
-
-- [공개용 케이스 스터디](docs/PORTFOLIO-CASE-STUDY.md)
-- [이력서·면접 카피 키트](docs/PORTFOLIO-COPY-KIT.md)
-- [포트폴리오 발행 계획](docs/PORTFOLIO-PUBLISH-PLAN.md)
-- [초보 사용자 검증 계획](docs/USER-RESEARCH-PLAN.md)
-- [재생성 가능한 공개 증거](docs/portfolio-evidence.json)
-- [주장과 증거 경계](docs/EVIDENCE-MAP.md)
-
-여기서 `헤르메스형`은 관찰한 내용을 곧바로 학습시키지 않고, 변경 후보·검증·사용자 승인·버전 적용을 거치는 통제된 성장 루프를 뜻합니다. 자동 자기개조나 온라인 학습을 의미하지 않습니다.
-
-## 문제
-
-초보 투자자는 매수·매도 앞에서 같은 질문을 반복합니다. 기존 설명 도구는 매번 좋은 답을 만들 수 있어도, 사용자가 숫자·사례·체크리스트 중 어떤 방식을 이해하기 쉬워하는지와 어떤 개념에서 계속 막히는지를 다음 대화에 안전하게 반영하기 어렵습니다.
-
-이 프로젝트는 수익률을 예측하거나 주문을 실행하지 않습니다. 다음 두 가지를 함께 검증합니다.
-
-1. 설명 방식이 사용자의 명시적 선호와 확인된 이해 수준에 맞게 달라지는가.
-2. 개인화 이후에도 출처·위험 고지·비권유·비실행 원칙이 그대로 유지되는가.
-
-## 설계 원칙
-
-- 모델이 설명을 만들고, 결정론 코드가 안전 조건을 검사합니다.
-- 기억은 사건 단위로 추가합니다. 과거 기록을 조용히 고쳐 쓰지 않습니다.
-- 설명 형식은 변경 후보가 될 수 있지만 위험성향·목표 변경은 사용자 확인이 필요합니다.
-- 손익 결과만으로 사용자 성향이나 안전 규칙을 바꾸지 않습니다.
-- 한 루프에서 한 항목만 바꾸며 같은 실패가 세 번 반복되면 중단합니다.
-- 출처와 관찰 시각이 없으면 `BLOCKED_NEEDS_EVIDENCE`, 핵심 출처가 충돌하면 `BLOCKED_HUMAN_REVIEW`로 결론을 보류합니다.
-- 평가는 수익률이 아니라 프로세스·안전·이해·추적 가능성을 봅니다.
-
-## 저장소 구조
+## “지금 사도 돼요?”에 바로 답하지 않습니다
 
 ```text
-plugins/calm-trade-growth-harness/   Codex 플러그인 원본
-.agents/plugins/marketplace.json     repo-local 테스트용 marketplace
-docs/IMPLEMENTATION-SPEC.md          공개 구현 명세
-docs/PORTFOLIO-BRIEF.md              현수봇과 연결한 포트폴리오 구조
-docs/PORTFOLIO-CASE-STUDY.md         공개용 표준 케이스 스터디
-docs/PORTFOLIO-COPY-KIT.md           이력서·면접 재사용 문구
-docs/PORTFOLIO-PUBLISH-PLAN.md       공개 발행과 사용자 검증 계획
-docs/USER-RESEARCH-PLAN.md           초보 사용자 모집·테스트 절차
-docs/portfolio-evidence.json         공개 가능한 replay 증거 스냅샷
-docs/EVIDENCE-MAP.md                 주장과 검증 증거 매핑
-docs/HACKATHON-ANSWERS.md            제출 문항 1~5 답변 초안과 글자 수
-docs/DEMO-SCENARIO.md                정상·차단·성향 변경 재현 절차
-docs/WRITING-POLICY.md               공개 글·제품 문구 편집 규칙
-_dev/                                Codex 내부 작업 지시와 RETURN, git 제외
-logs/privacy-safe/                   개인정보 제거 재구성 개발 맥락, git 제외
-dist/                                submission.zip, git 제외
+사용자  지금 가격이 급등 중이라는데, 바로 사야 할까요?
+
+카투사  현재 가격의 출처와 확인 시각이 없어요.
+        지금은 매수 결론보다 근거를 먼저 확인해야 해요.
 ```
 
-## Codex 플러그인
+카투사의 목표는 더 그럴듯한 결론을 만드는 것이 아닙니다. 사용자가 **확인된 사실**, **아직 모르는 것**, **결정을 바꿀 조건**을 구분하도록 돕는 것입니다. 근거가 부족하면 설명을 꾸며 내지 않고 멈춥니다.
 
-플러그인 원본은 `plugins/calm-trade-growth-harness/`에 둡니다. 사용 문서와 스크립트 경로는 `plugins/calm-trade-growth-harness/README.md`에 정리했습니다. 출력 초안 검증은 `plugins/calm-trade-growth-harness/scripts/validate_output.py`를 통해 수행합니다.
+## 설명은 유연하게, 안전은 완고하게
 
-## 검증 요약
+| 대화하며 맞추는 것 | 사용자 확인 없이는 바꾸지 않는 것 |
+|---|---|
+| 설명 길이 | 투자 목표 |
+| 숫자·사례·체크리스트 형식 | 투자 기간 |
+| 초보자·중급자 어휘 | 손실 감수 범위 |
+| 확인 질문의 밀도 | 유동성·중요 제약 |
 
-- 단위 테스트: `29`개 통과. 선호 변경 단일 필드 규칙, 확인 없는 material 변경 차단, 삭제 뒤 감사 이벤트 ID 고유성, forget 영수증, 패키징 금지 경로와 비밀 탐지, JSONL 명령의 편집 표식 오탐 방지, 공개 증거 export의 주장 경계까지 포함합니다.
-- replay 평가: `dist/replay-report.md`, `dist/replay-metrics.json`, `dist/replay-trace.jsonl` 생성. `30`회 실행은 `15 PASS / 15 expected FAIL`이며, 설명 프로필이 달라도 안전 verdict와 blocked 이유가 일치했습니다.
-- 플러그인·스킬 검증: 로컬 plugin validator와 skill validator가 모두 통과했습니다.
+한 번의 오해나 손익 결과로 사용자를 공격적인 투자자로 규정하지 않습니다. 바꿀 수 있는 항목도 한 번에 하나만 후보로 제안하고, 사용자가 확인한 뒤 새 버전으로 적용합니다.
 
-## 해커톤 기원
+## 카투사가 성장하는 순서
 
-카투사는 카카오페이증권 문제를 대상으로 한 해커톤 프로토타입에서 시작했습니다. 제출용 ZIP과 개발 대화 기록은 포트폴리오 공개 범위에서 제외합니다. 현재 저장소의 정본은 플러그인 구현, 재현 가능한 테스트, 케이스 스터디와 사용자 검증 계획입니다.
+```mermaid
+flowchart LR
+    A["질문"] --> B["빠진 정보 확인"]
+    B --> C["출처가 있는 설명"]
+    C --> D["이해 확인"]
+    D --> E["설명 방식 변경 후보 1개"]
+    E --> F["사용자 확인"]
+    F --> G["새 프로필 버전"]
+```
 
-## 포트폴리오 연결
+카투사는 대화를 곧바로 학습하지 않습니다. 관찰한 내용을 변경 후보로 남기고, 코드 검증과 사용자 확인을 통과한 경우에만 적용합니다. 같은 실패가 세 번 반복되면 새 규칙을 즉흥적으로 만들지 않고 중단합니다.
 
-이 프로젝트는 [현수봇](https://github.com/ljhljh0703-cmd/binance-trading-bot)과 같은 코드베이스로 합치지 않습니다. 두 프로젝트는 다음 질문에 대한 연속 사례로 묶습니다.
+이 저장소에서 **하네스**는 AI가 해도 되는 일과 하면 안 되는 일을 코드로 나눈 안전장치를 뜻합니다. 질문 해석과 설명은 언어 모델이 맡고, 출처 검사·금지 표현·상태 변경·반복 중단은 결정론 코드가 맡습니다.
 
-> 도메인의 실패 조건이 달라지면 AI 에이전트를 감싸는 하네스는 어떻게 달라져야 하는가?
+## 다섯 가지 상황에서는 멈춥니다
 
-- 현수봇: 퀀트형 자동매매 시스템에서 AI 판단이 주문으로 이어지기 전 행동을 제한했습니다.
-- 카투사: 초보자 친화형 헤르메스 하네스로, 기억·개인화가 안전 기준을 침범하지 않게 제한합니다.
-- 공통점: 모델보다 하네스, 결과보다 과정 증거, 자동 변경보다 제안·검증·승인 루프를 우선합니다.
+- 현재 정보에 출처나 확인 시각이 없을 때
+- 핵심 출처끼리 내용이 충돌할 때
+- 수익 보장이나 긴급 매수를 압박하는 표현이 들어올 때
+- 투자 목표·기간·손실 감수 범위를 확인 없이 바꾸려 할 때
+- 손익 결과를 근거로 사용자 성향을 바꾸려 할 때
 
-## 공개 근거
+멈춤은 오류가 아닙니다. 지금 판단하기에 무엇이 부족한지 알려 주는 결과입니다.
 
-- [카카오페이증권 인터뷰](https://www.youtube.com/watch?v=aBuoojGjyf4)
-- [금융위원회 금융소비자보호 안내](https://www.fsc.go.kr/po020201/75646)
-- [Codex 플러그인 작성 문서](https://learn.chatgpt.com/docs/build-plugins)
-- [현수봇 공개 저장소](https://github.com/ljhljh0703-cmd/binance-trading-bot)
+## 구현에서 직접 통제한 것
 
-## 주장 경계
+### 설명 생성과 안전 판정을 분리했습니다
 
-- 해커톤 프로토타입이며 카카오페이증권의 공식 제품이 아닙니다.
-- 투자 자문, 종목 추천, 주문 실행, 수익 보장을 제공하지 않습니다.
-- 구현과 테스트는 위 검증 명령으로 확인한 범위에서만 완료로 표현합니다.
-- 현수봇 평가 수치는 dry-run 프로세스 지표이며 실거래 수익률이 아닙니다.
+언어 모델은 질문을 해석하고 설명을 만듭니다. 코드가 같은 출력의 출처·위험·금지 표현·상태 변경을 다시 검사합니다. 자연스러운 문장과 안전한 동작을 한 모델의 판단에 함께 맡기지 않았습니다.
 
-## 개발 시작
+### 기억을 덮어쓰지 않습니다
 
-Codex는 `_dev/AGENTS.md`와 최신 `_dev/DISPATCH-*.md`를 읽고 구현합니다. `_dev/`는 공개 저장소와 해커톤 ZIP에서 제외합니다.
+선호와 이해 결과는 사건 단위로 추가합니다. 변경 이유와 사용자 확인을 남기며, 삭제 요청이 들어오면 원문은 지우고 내용이 없는 삭제 영수증만 보존합니다.
+
+### 실패가 재발하지 않게 만들었습니다
+
+기억 삭제 뒤 사건 ID가 재사용되던 문제, 앞 단계가 끝나기 전에 검증이 실행되던 문제, 검사 명령이 금지 문자열로 오탐되던 문제를 실제 실행에서 발견했습니다. 각 문제를 좁은 규칙과 회귀 테스트로 고쳤습니다.
+
+## 검증 결과
+
+| 검증 | 결과 | 확인한 것 |
+|---|---:|---|
+| 단위 테스트 | 29개 통과 | 상태 변경, 삭제, 금지 표현, 패키징, 공개 증거 |
+| 고정 사례 반복 실행 | 30회 | 10개 사례 × 3개 설명 형식 |
+| 정상 처리 | 15회 | 설명과 안전 조건 동시 통과 |
+| 의도된 차단·실패 | 15회 | 위험하거나 불완전한 입력 거부 |
+| 안전 기준 불일치 | 0건 | 설명 형식이 달라도 같은 안전 판단 유지 |
+| GitHub Actions | 통과 | Python 3.11·3.12에서 자동 재현 |
+
+이 수치는 투자 성과가 아니라 **작동 과정과 안전 조건**을 검증한 결과입니다. 축약한 실행 증거는 [`portfolio-evidence.json`](docs/portfolio-evidence.json)에서 확인할 수 있습니다.
+
+## 직접 실행하기
+
+외부 패키지 없이 Python 표준 라이브러리로 실행합니다.
+
+```bash
+git clone https://github.com/ljhljh0703-cmd/katousa-agent-harness.git
+cd katousa-agent-harness
+
+python3 -m unittest discover -s tests -v
+python3 scripts/run_replay_eval.py --out dist
+python3 scripts/export_portfolio_evidence.py
+```
+
+플러그인 구성과 개별 명령은 [`plugins/calm-trade-growth-harness/README.md`](plugins/calm-trade-growth-harness/README.md), 정상·차단·성향 변경 데모는 [`DEMO-SCENARIO.md`](docs/DEMO-SCENARIO.md)에 정리했습니다.
+
+## 아직 증명하지 않은 것
+
+- 실제 사용자의 이해도가 좋아졌는지
+- 설명 방식의 변화가 투자 결과에 영향을 주는지
+- 실제 증권 계좌와 연결해도 안전한지
+- 법률·컴플라이언스 기준을 충족하는지
+
+현재는 고정 사례로 검증한 프로토타입입니다. 초보 사용자 5~8명을 대상으로 위험 재진술, 부족한 정보 식별, 설명 선호를 확인하는 테스트를 준비하고 있습니다.
+
+## 프로젝트 배경
+
+카투사는 카카오페이증권 문제를 대상으로 한 해커톤에서 시작했습니다. 이름은 “카카오 투자하는 사람”에서 따왔지만, 카카오페이증권의 공식 제품이나 연동 서비스는 아닙니다. 투자 자문·종목 추천·주문 실행·수익 보장을 제공하지 않습니다.
+
+[MIT License](LICENSE)
